@@ -10,15 +10,15 @@ use App\Services\Api\Coordinates\CoordinateService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class CoordinatesController
+class CoordinateController
 {
-    public function saveCoordinates(CoordinateService $coordinateService, StoreRequest $request): JsonResponse
+    public function store(CoordinateService $coordinateService, StoreRequest $request): JsonResponse
     {
         $data = $request->validated();
         return $coordinateService->saveCoordinates($data);
     }
 
-    public function getUserRoute(CoordinateService $coordinateService, IndexRequest $request, int $userId): JsonResponse|AnonymousResourceCollection
+    public function show(CoordinateService $coordinateService, IndexRequest $request, int $userId): JsonResponse|AnonymousResourceCollection
     {
         $data = $request->validated();
         return $coordinateService->getCoordinates($data, $userId);
