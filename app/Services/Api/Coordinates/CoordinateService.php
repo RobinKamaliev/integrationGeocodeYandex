@@ -18,7 +18,7 @@ class CoordinateService
     public function saveCoordinates(array $data): JsonResponse
     {
         try {
-            $data['user_id'] = (int)$data['user_id'] ?? Auth::id();
+            $data['user_id'] = $data['user_id'] ?? Auth::id();
             $coordinate = Coordinate::create($data);
         } catch (\Exception) {
             return StatusRequestService::responseBadRequest('coordinate not created');
