@@ -16,10 +16,10 @@ final class StatusRequestService
             ->setStatusCode(Response::HTTP_NOT_FOUND);
     }
 
-    public static function responseSuccessRequest(string $message): JsonResponse
+    public static function responseSuccessRequest(array $data): JsonResponse
     {
         return response()
-            ->json(['message' => $message])
+            ->json($data)
             ->setStatusCode(Response::HTTP_OK);
     }
 
