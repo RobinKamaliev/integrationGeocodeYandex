@@ -43,6 +43,7 @@ namespace App\Http\Controllers\Documentation\Models;
  *      path="/api/coordinates/{userId}",
  *      tags={"Coordinates"},
  *      summary="Retrieve coordinates by user ID",
+ *     security={{"bearerAuth": {} }},
  *      description="Retrieve coordinates within a specific time range with pagination",
  *      @OA\Parameter(
  *          name="userId",
