@@ -18,7 +18,7 @@ class CoordinateService
     public function saveCoordinates(array $data): JsonResponse
     {
         try {
-            $data['user_id'] ?? Auth::user()->id;
+            $data['user_id'] = (int)$data['user_id'] ?? Auth::id();
             $coordinate = Coordinate::create($data);
         } catch (\Exception) {
             return StatusRequestService::responseBadRequest('coordinate not created');
@@ -26,7 +26,7 @@ class CoordinateService
 
         GeocodingJob::dispatch($coordinate);
 
-        return StatusRequestService::responseSuccessRequest('задача поставлена');
+        return StatusRequestService::responseSuccessRequest(['message' => 'задача поставлена']);
     }
 
     public function getCoordinates(array $data, int $userId): JsonResponse|AnonymousResourceCollection
@@ -44,7 +44,7 @@ class CoordinateService
                 ->whereBetween('created_at', [$fromDateTime, $toDateTime])
                 ->orderBy('created_at', 'desc')
                 ->select('address', 'longitude', 'latitude')
-                    ->simplePaginate($paginate);
+                ->simplePaginate($paginate);
         } catch (\Exception) {
             return StatusRequestService::responseBadRequest('sql');
         }
