@@ -35,7 +35,7 @@ class AuthService
     {
         return StatusRequestService::responseSuccessRequest([
             'access_token' => $token,
-            'refreshToken ' => \auth()->refresh(),
+            'refresh_token ' => \auth()->refresh(),
         ]);
     }
 }
