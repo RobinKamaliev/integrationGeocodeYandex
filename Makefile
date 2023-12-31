@@ -7,6 +7,7 @@ start-local:
 	&& docker exec -it app php artisan jwt:secret --force \
 	&& docker exec -it app php artisan key:generate \
 	&& docker exec -it app php artisan route:cache \
+	&& docker exec -it app php artisan test \
 	&& make chmod
 
 env-local:
