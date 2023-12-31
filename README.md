@@ -18,4 +18,5 @@
 
 # Установка
 
-1. `make start-local`
+1. `make start-local` запуск проекта локально
+2. `make add-key-geocode-yandex` добавить ключ для geocode-yandex

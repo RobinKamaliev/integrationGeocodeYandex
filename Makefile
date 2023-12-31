@@ -16,3 +16,6 @@ env-local:
 chmod:
 	docker exec -it app chmod -R 777 vendor \
 	&& docker exec -it app chmod -R 777 storage
+
+add-key-geocode-yandex:
+	docker exec -it app php artisan add-key:geocode-yandex
