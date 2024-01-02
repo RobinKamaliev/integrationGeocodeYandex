@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands\Keys;
 
 use App\Models\IntegrationKeys;
-use App\Services\Api\Coordinates\YandexGeocodingService;
+use App\Services\Api\Coordinates\Yandex\YandexGeocodingService;
 use Illuminate\Console\Command;
 
 class GeocodeYandexKey extends Command

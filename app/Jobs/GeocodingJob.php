@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Jobs;
 
 use App\Models\Coordinate;
-use App\Services\Api\Coordinates\YandexGeocodingService;
+use App\Services\Api\Coordinates\Yandex\YandexCoordinate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -23,9 +23,9 @@ class GeocodingJob implements ShouldQueue
         $this->coordinate = $coordinate;
     }
 
-    public function handle(YandexGeocodingService $geocodingService): void
+    public function handle(YandexCoordinate $yandexCoordinate): void
     {
-        if ($address = $geocodingService->getAddress($this->coordinate->latitude, $this->coordinate->longitude)) {
+        if ($address = $yandexCoordinate->getAddress($this->coordinate->latitude, $this->coordinate->longitude)) {
             $this->coordinate->update(['address' => $address]);
         }
     }

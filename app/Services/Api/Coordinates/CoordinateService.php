@@ -27,7 +27,7 @@ class CoordinateService
         try {
             GeocodingJob::dispatch($coordinate);
         } catch (\Throwable) {
-            return StatusRequestService::responseSuccessRequest(['error' => 'задача не поставлена']);
+            return StatusRequestService::responseBadRequest('задача не поставлена');
         }
 
         return StatusRequestService::responseSuccessRequest(['message' => 'задача поставлена']);

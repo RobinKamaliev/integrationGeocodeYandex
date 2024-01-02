@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Api\Coordinates;
+namespace App\Services\Api\Coordinates\Yandex;
 
 use App\Models\IntegrationKeys;
+use App\Services\Api\Coordinates\Base\Coordinates;
 use Illuminate\Support\Facades\Http;
 
-class YandexGeocodingService
+class YandexGeocodingService implements Coordinates
 {
     const NAME_KEY = 'geocode_yandex';
     const URL = 'https://geocode-maps.yandex.ru/1.x/';
 
-    public function getAddress($latitude, $longitude): ?string
+    public function getAddress(float $latitude, float $longitude): ?string
     {
         $domain = self::URL;
 
@@ -21,9 +22,8 @@ class YandexGeocodingService
             $url = "$domain?apikey=$apiKey&format=json&geocode=$longitude,$latitude";
 
             try {
-                $response = Http::get($url)->body();
-                $data = json_decode($response, true);
-                return $data['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['text'];
+                $response = Http::get($url)->json();
+                return $response['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData']['text'];
             } catch (\Exception) {
                 return null;
             }
@@ -32,7 +32,7 @@ class YandexGeocodingService
         return null;
     }
 
-    protected function getKey(): ?string
+    public function getKey(): ?string
     {
         if ($key = IntegrationKeys::query()
             ->orderBy('created_at', 'desc')
