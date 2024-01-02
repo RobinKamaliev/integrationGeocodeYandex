@@ -24,7 +24,11 @@ class CoordinateService
             return StatusRequestService::responseBadRequest('coordinate not created');
         }
 
-        GeocodingJob::dispatch($coordinate);
+        try {
+            GeocodingJob::dispatch($coordinate);
+        } catch (\Throwable) {
+            return StatusRequestService::responseSuccessRequest(['error' => 'задача не поставлена']);
+        }
 
         return StatusRequestService::responseSuccessRequest(['message' => 'задача поставлена']);
     }
