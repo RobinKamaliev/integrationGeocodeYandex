@@ -1,0 +1,5 @@
+Horizon started successfully.
+  2024-01-02 14:20:01 App\Jobs\GeocodingJob .......................... RUNNING
+  2024-01-02 14:20:01 App\Jobs\GeocodingJob ..................... 92.75ms DONE
+  2024-01-02 14:20:25 App\Jobs\GeocodingJob .......................... RUNNING
+  2024-01-02 14:20:25 App\Jobs\GeocodingJob ...................... 8.74ms DONE
